@@ -5,7 +5,6 @@ import (
 )
 
 type DiscoveryClient interface {
-
 	/**
 	 * 服务注册接口
 	 * @param serviceName 服务名
@@ -29,4 +28,3 @@ type DiscoveryClient interface {
 	 */
 	DiscoverServices(serviceName string, logger *log.Logger) []interface{}
 }
-

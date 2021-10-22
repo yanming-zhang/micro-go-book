@@ -47,10 +47,7 @@ func NewMyDiscoverClient(consulHost string, consulPort int) (DiscoveryClient, er
 	}, nil
 }
 
-
-func (consulClient *MyDiscoverClient) Register(serviceName, instanceId, healthCheckUrl string,instanceHost string, instancePort int, meta map[string]string, logger *log.Logger) bool {
-
-
+func (consulClient *MyDiscoverClient) Register(serviceName, instanceId, healthCheckUrl string, instanceHost string, instancePort int, meta map[string]string, logger *log.Logger) bool {
 	// 1.封装服务实例的元数据
 	instanceInfo := &InstanceInfo{
 		ID:                instanceId,
@@ -61,8 +58,8 @@ func (consulClient *MyDiscoverClient) Register(serviceName, instanceId, healthCh
 		EnableTagOverride: false,
 		Check: Check{
 			DeregisterCriticalServiceAfter: "30s",
-			HTTP:                           "http://" + instanceHost + ":" + strconv.Itoa(instancePort) + healthCheckUrl,
-			Interval:                       "15s",
+			HTTP:     "http://" + instanceHost + ":" + strconv.Itoa(instancePort) + healthCheckUrl,
+			Interval: "15s",
 		},
 		Weights: Weights{
 			Passing: 10,
@@ -119,7 +116,6 @@ func (consulClient *MyDiscoverClient) DeRegister(instanceId string, logger *log.
 	return false
 }
 
-
 func (consulClient *MyDiscoverClient) DiscoverServices(serviceName string, logger *log.Logger) []interface{} {
 	// 1. 从 Consul 中获取服务实例列表
 	req, err := http.NewRequest("GET",
@@ -130,7 +126,6 @@ func (consulClient *MyDiscoverClient) DiscoverServices(serviceName string, logge
 	if err != nil {
 		log.Println("Discover Service Error!")
 	} else if resp.StatusCode == 200 {
-
 		var serviceList []struct {
 			Service InstanceInfo `json:"Service"`
 		}
