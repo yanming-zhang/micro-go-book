@@ -3,9 +3,10 @@ package endpoint
 import (
 	"context"
 	"errors"
-	"github.com/go-kit/kit/endpoint"
-	"github.com/longjoy/micro-go-book/ch10-resiliency/string-service/service"
+	"micro-go-book/ch10-resiliency/string-service/service"
 	"strings"
+
+	"github.com/go-kit/kit/endpoint"
 )
 
 // StringEndpoint define endpoint
@@ -13,7 +14,6 @@ type StringEndpoints struct {
 	StringEndpoint      endpoint.Endpoint
 	HealthCheckEndpoint endpoint.Endpoint
 }
-
 
 var (
 	ErrInvalidRequestType = errors.New("RequestType has only two type: Concat, Diff")

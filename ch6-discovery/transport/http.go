@@ -4,12 +4,13 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	endpts "micro-go-book/ch6-discovery/endpoint"
+	"net/http"
+
 	"github.com/go-kit/kit/log"
 	"github.com/go-kit/kit/transport"
 	kithttp "github.com/go-kit/kit/transport/http"
 	"github.com/gorilla/mux"
-	endpts "github.com/longjoy/micro-go-book/ch6-discovery/endpoint"
-	"net/http"
 )
 
 var (
@@ -39,7 +40,6 @@ func MakeHttpHandler(ctx context.Context, endpoints endpts.DiscoveryEndpoints, l
 		options...,
 	))
 
-
 	// create health check handler
 	r.Methods("GET").Path("/health").Handler(kithttp.NewServer(
 		endpoints.HealthCheckEndpoint,
@@ -56,18 +56,16 @@ func decodeSayHelloRequest(_ context.Context, r *http.Request) (interface{}, err
 	return endpts.SayHelloRequest{}, nil
 }
 
-
 // decodeDiscoveryRequest decode request params to struct
 func decodeDiscoveryRequest(_ context.Context, r *http.Request) (interface{}, error) {
 	serviceName := r.URL.Query().Get("serviceName")
-	if serviceName == ""{
+	if serviceName == "" {
 		return nil, ErrorBadRequest
 	}
 	return endpts.DiscoveryRequest{
-		ServiceName:serviceName,
+		ServiceName: serviceName,
 	}, nil
 }
-
 
 // decodeHealthCheckRequest decode request
 func decodeHealthCheckRequest(ctx context.Context, r *http.Request) (interface{}, error) {
@@ -80,7 +78,6 @@ func encodeJsonResponse(ctx context.Context, w http.ResponseWriter, response int
 	return json.NewEncoder(w).Encode(response)
 }
 
-
 // encode errors from business-logic
 func encodeError(_ context.Context, err error, w http.ResponseWriter) {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
@@ -92,4 +89,3 @@ func encodeError(_ context.Context, err error, w http.ResponseWriter) {
 		"error": err.Error(),
 	})
 }
-

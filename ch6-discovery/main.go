@@ -4,17 +4,18 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"github.com/longjoy/micro-go-book/ch6-discovery/config"
-	"github.com/longjoy/micro-go-book/ch6-discovery/discover"
-	"github.com/longjoy/micro-go-book/ch6-discovery/endpoint"
-	"github.com/longjoy/micro-go-book/ch6-discovery/service"
-	"github.com/longjoy/micro-go-book/ch6-discovery/transport"
-	uuid "github.com/satori/go.uuid"
+	"micro-go-book/ch6-discovery/config"
+	"micro-go-book/ch6-discovery/discover"
+	"micro-go-book/ch6-discovery/endpoint"
+	"micro-go-book/ch6-discovery/service"
+	"micro-go-book/ch6-discovery/transport"
 	"net/http"
 	"os"
 	"os/signal"
 	"strconv"
 	"syscall"
+
+	uuid "github.com/satori/go.uuid"
 )
 
 func main() {
@@ -40,7 +41,7 @@ func main() {
 
 	discoveryClient, err := discover.NewKitDiscoverClient(*consulHost, *consulPort)
 	// 获取服务发现客户端失败，直接关闭服务
-	if err != nil{
+	if err != nil {
 		config.Logger.Println("Get Consul Client failed")
 		os.Exit(-1)
 	}
@@ -56,9 +57,9 @@ func main() {
 	healthEndpoint := endpoint.MakeHealthCheckEndpoint(svc)
 
 	endpts := endpoint.DiscoveryEndpoints{
-		SayHelloEndpoint:		sayHelloEndpoint,
-		DiscoveryEndpoint:		discoveryEndpoint,
-		HealthCheckEndpoint:	healthEndpoint,
+		SayHelloEndpoint:    sayHelloEndpoint,
+		DiscoveryEndpoint:   discoveryEndpoint,
+		HealthCheckEndpoint: healthEndpoint,
 	}
 
 	//创建http.Handler
@@ -69,13 +70,13 @@ func main() {
 	go func() {
 		config.Logger.Println("Http Server start at port:" + strconv.Itoa(*servicePort))
 		//启动前执行注册
-		if !discoveryClient.Register(*serviceName, instanceId, "/health", *serviceHost,  *servicePort, nil, config.Logger){
+		if !discoveryClient.Register(*serviceName, instanceId, "/health", *serviceHost, *servicePort, nil, config.Logger) {
 			config.Logger.Printf("string-service for service %s failed.", serviceName)
 			// 注册失败，服务启动失败
 			os.Exit(-1)
 		}
 		handler := r
-		errChan <- http.ListenAndServe(":"  + strconv.Itoa(*servicePort), handler)
+		errChan <- http.ListenAndServe(":"+strconv.Itoa(*servicePort), handler)
 	}()
 
 	go func() {
