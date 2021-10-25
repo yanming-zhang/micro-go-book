@@ -1,12 +1,13 @@
 package discover
 
 import (
-	"github.com/go-kit/kit/sd/consul"
-	"github.com/hashicorp/consul/api"
-	"github.com/hashicorp/consul/api/watch"
 	"log"
 	"strconv"
 	"sync"
+
+	"github.com/go-kit/kit/sd/consul"
+	"github.com/hashicorp/consul/api"
+	"github.com/hashicorp/consul/api/watch"
 )
 
 type KitDiscoverClient struct {
@@ -15,7 +16,7 @@ type KitDiscoverClient struct {
 	client consul.Client
 	// 连接 consul 的配置
 	config *api.Config
-	mutex sync.Mutex
+	mutex  sync.Mutex
 	// 服务实例缓存字段
 	instancesMap sync.Map
 }
@@ -32,13 +33,12 @@ func NewKitDiscoverClient(consulHost string, consulPort int) (DiscoveryClient, e
 	return &KitDiscoverClient{
 		Host:   consulHost,
 		Port:   consulPort,
-		config:consulConfig,
+		config: consulConfig,
 		client: client,
 	}, err
 }
 
 func (consulClient *KitDiscoverClient) Register(serviceName, instanceId, healthCheckUrl string, instanceHost string, instancePort int, meta map[string]string, logger *log.Logger) bool {
-
 	// 1. 构建服务实例元数据
 	serviceRegistration := &api.AgentServiceRegistration{
 		ID:      instanceId,
@@ -48,8 +48,8 @@ func (consulClient *KitDiscoverClient) Register(serviceName, instanceId, healthC
 		Meta:    meta,
 		Check: &api.AgentServiceCheck{
 			DeregisterCriticalServiceAfter: "30s",
-			HTTP:                           "http://" + instanceHost + ":" + strconv.Itoa(instancePort) + healthCheckUrl,
-			Interval:                       "15s",
+			HTTP:     "http://" + instanceHost + ":" + strconv.Itoa(instancePort) + healthCheckUrl,
+			Interval: "15s",
 		},
 	}
 
@@ -65,7 +65,6 @@ func (consulClient *KitDiscoverClient) Register(serviceName, instanceId, healthC
 }
 
 func (consulClient *KitDiscoverClient) DeRegister(instanceId string, logger *log.Logger) bool {
-
 	// 构建包含服务实例 ID 的元数据结构体
 	serviceRegistration := &api.AgentServiceRegistration{
 		ID: instanceId,
@@ -83,8 +82,7 @@ func (consulClient *KitDiscoverClient) DeRegister(instanceId string, logger *log
 }
 
 func (consulClient *KitDiscoverClient) DiscoverServices(serviceName string, logger *log.Logger) []interface{} {
-
-	//  该服务已监控并缓存
+	// 该服务已监控并缓存
 	instanceList, ok := consulClient.instancesMap.Load(serviceName)
 	if ok {
 		return instanceList.([]interface{})

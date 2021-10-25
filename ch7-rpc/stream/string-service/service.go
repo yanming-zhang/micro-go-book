@@ -3,9 +3,9 @@ package string_service
 import (
 	"context"
 	"errors"
-	"github.com/longjoy/micro-go-book/ch7-rpc/stream-pb"
 	"io"
 	"log"
+	stream_pb "micro-go-book/ch7-rpc/stream/stream-pb"
 	"strings"
 )
 
@@ -15,8 +15,7 @@ const (
 
 // Service errors
 var (
-	ErrMaxSize = errors.New("maximum size of 1024 bytes exceeded")
-
+	ErrMaxSize  = errors.New("maximum size of 1024 bytes exceeded")
 	ErrStrValue = errors.New("maximum size of 1024 bytes exceeded")
 )
 
@@ -32,6 +31,7 @@ func (s *StringService) LotsOfServerStream(req *stream_pb.StringRequest, qs stre
 
 func (s *StringService) LotsOfClientStream(qs stream_pb.StringService_LotsOfClientStreamServer) error {
 	var params []string
+
 	for {
 		in, err := qs.Recv()
 		if err == io.EOF {
@@ -45,6 +45,7 @@ func (s *StringService) LotsOfClientStream(qs stream_pb.StringService_LotsOfClie
 		params = append(params, in.A, in.B)
 	}
 }
+
 func (s *StringService) LotsOfServerAndClientStream(qs stream_pb.StringService_LotsOfServerAndClientStreamServer) error {
 	for {
 		in, err := qs.Recv()

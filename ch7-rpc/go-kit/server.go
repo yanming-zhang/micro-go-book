@@ -3,16 +3,17 @@ package main
 import (
 	"context"
 	"flag"
-	"github.com/go-kit/kit/log"
-	service "github.com/longjoy/micro-go-book/ch7-rpc/go-kit/string-service"
-	"github.com/longjoy/micro-go-book/ch7-rpc/pb"
-	"google.golang.org/grpc"
+	service "micro-go-book/ch7-rpc/go-kit/string-service"
 	"net"
 	"os"
+
+	"micro-go-book/ch7-rpc/go-kit/pb"
+
+	"github.com/go-kit/kit/log"
+	"google.golang.org/grpc"
 )
 
 func main() {
-
 	flag.Parse()
 
 	ctx := context.Background()
@@ -47,5 +48,4 @@ func main() {
 	gRPCServer := grpc.NewServer()
 	pb.RegisterStringServiceServer(gRPCServer, handler)
 	gRPCServer.Serve(ls)
-
 }

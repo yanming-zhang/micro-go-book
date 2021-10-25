@@ -1,8 +1,9 @@
 package main
 
 import (
-	"github.com/go-kit/kit/log"
 	"time"
+
+	"github.com/go-kit/kit/log"
 )
 
 // loggingMiddleware Make a new type
@@ -20,7 +21,6 @@ func LoggingMiddleware(logger log.Logger) ServiceMiddleware {
 }
 
 func (mw loggingMiddleware) Concat(a, b string) (ret string, err error) {
-
 	defer func(begin time.Time) {
 		mw.logger.Log(
 			"function", "Concat",
@@ -36,7 +36,6 @@ func (mw loggingMiddleware) Concat(a, b string) (ret string, err error) {
 }
 
 func (mw loggingMiddleware) Diff(a, b string) (ret string, err error) {
-
 	defer func(begin time.Time) {
 		mw.logger.Log(
 			"function", "Diff",

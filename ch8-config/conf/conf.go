@@ -3,11 +3,12 @@ package conf
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/spf13/viper"
-	_ "github.com/streadway/amqp"
 	"log"
 	"net/http"
 	"strings"
+
+	"github.com/spf13/viper"
+	_ "github.com/streadway/amqp"
 )
 
 const (
@@ -50,8 +51,8 @@ func initDefault() {
 	viper.SetDefault(kConfigProfile, "dev")
 	viper.SetDefault(kConfigType, "yaml")
 	viper.SetDefault(kAmqpURI, "amqp://admin:admin@114.67.98.210:5672")
-
 }
+
 func handleRefreshEvent(body []byte, consumerTag string) {
 	updateToken := &UpdateToken{}
 	err := json.Unmarshal(body, updateToken)

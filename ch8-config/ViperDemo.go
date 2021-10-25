@@ -3,9 +3,10 @@ package main
 import (
 	"errors"
 	"fmt"
-	"github.com/spf13/viper"
 	"log"
 	"reflect"
+
+	"github.com/spf13/viper"
 )
 
 var Resume ResumeInformation
@@ -23,6 +24,7 @@ func init() {
 		log.Fatal("Fail to parse config", err)
 	}
 }
+
 func initDefault() {
 	//设置读取的配置文件
 	viper.SetConfigName("resume_config")
@@ -33,6 +35,7 @@ func initDefault() {
 	//设置配置文件类型
 	viper.SetConfigType("yaml")
 }
+
 func main() {
 	fmt.Printf(
 		"姓名: %s\n爱好: %s\n性别: %s \n年龄: %d \n",
@@ -84,6 +87,7 @@ func parseYaml(v *viper.Viper) {
 	}
 	fmt.Println("resume config:\n ", resumeConfig)
 }
+
 func sub(key string, value interface{}) error {
 	log.Printf("配置文件的前缀为：%v", key)
 	sub := viper.Sub(key)

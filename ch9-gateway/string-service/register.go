@@ -1,17 +1,17 @@
 package main
 
 import (
+	"os"
+	"strconv"
+
 	"github.com/go-kit/kit/log"
 	"github.com/go-kit/kit/sd"
 	"github.com/go-kit/kit/sd/consul"
 	"github.com/hashicorp/consul/api"
 	"github.com/pborman/uuid"
-	"os"
-	"strconv"
 )
 
 func Register(consulHost, consulPort, svcHost, svcPort string, logger log.Logger) (registar sd.Registrar) {
-
 	// 创建Consul客户端连接
 	var client consul.Client
 	{

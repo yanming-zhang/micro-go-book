@@ -3,8 +3,10 @@ package string_service
 import (
 	"context"
 	"errors"
+
+	"micro-go-book/ch7-rpc/go-kit/pb"
+
 	"github.com/go-kit/kit/transport/grpc"
-	"github.com/longjoy/micro-go-book/ch7-rpc/pb"
 )
 
 var (

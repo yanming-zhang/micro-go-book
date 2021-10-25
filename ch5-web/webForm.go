@@ -10,6 +10,7 @@ import (
 
 func login(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("method:", r.Method) //获取请求的方法
+
 	if r.Method == "GET" {
 		t, _ := template.ParseFiles("login.tpl")
 		log.Println(t.Execute(w, nil))

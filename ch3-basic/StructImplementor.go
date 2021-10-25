@@ -19,16 +19,16 @@ type CatDog struct {
 }
 
 //  实现Cat接口
-func (catDog *CatDog) CatchMouse()  {
+func (catDog *CatDog) CatchMouse() {
 	fmt.Printf("%v caught the mouse and ate it!\n", catDog.Name)
 }
 
 // Dog接口
-func (catDog *CatDog) Bark()  {
+func (catDog *CatDog) Bark() {
 	fmt.Printf("%v barked loudly!\n", catDog.Name)
 }
 
-func main()  {
+func main() {
 	catDog := &CatDog{
 		"Lucy",
 	}

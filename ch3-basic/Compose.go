@@ -6,7 +6,7 @@ import "fmt"
 type Swimming struct {
 }
 
-func (swim *Swimming) swim()  {
+func (swim *Swimming) swim() {
 	fmt.Println("swimming is my ability")
 }
 
@@ -14,7 +14,7 @@ func (swim *Swimming) swim()  {
 type Flying struct {
 }
 
-func (fly *Flying) fly()  {
+func (fly *Flying) fly() {
 	fmt.Println("flying is my ability")
 }
 
@@ -29,8 +29,7 @@ type DomesticDuck struct {
 	Swimming
 }
 
-func main()  {
-
+func main() {
 	// 声明一只野鸭，可以飞，也可以游泳
 	wild := WildDuck{}
 	wild.fly()
@@ -39,6 +38,4 @@ func main()  {
 	// 声明一只家鸭，只会游泳
 	domestic := DomesticDuck{}
 	domestic.swim()
-
-	
 }

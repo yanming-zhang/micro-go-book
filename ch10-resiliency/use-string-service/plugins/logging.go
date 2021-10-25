@@ -1,9 +1,10 @@
 package plugins
 
 import (
-	"github.com/go-kit/kit/log"
-	"github.com/longjoy/micro-go-book/ch10-resiliency/use-string-service/service"
+	"micro-go-book/ch10-resiliency/use-string-service/service"
 	"time"
+
+	"github.com/go-kit/kit/log"
 )
 
 // loggingMiddleware Make a new type
@@ -20,9 +21,7 @@ func LoggingMiddleware(logger log.Logger) service.ServiceMiddleware {
 	}
 }
 
-
 func (mw loggingMiddleware) UseStringService(operationType, a, b string) (ret string, err error) {
-
 	defer func(begin time.Time) {
 		mw.logger.Log(
 			"function", "UseStringService",
@@ -48,5 +47,3 @@ func (mw loggingMiddleware) HealthCheck() (result bool) {
 	result = mw.Service.HealthCheck()
 	return
 }
-
-

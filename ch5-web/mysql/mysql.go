@@ -3,11 +3,12 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	_ "github.com/go-sql-driver/mysql"
 	"html/template"
 	"log"
 	"net/http"
 	"time"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
 type User struct {
@@ -31,12 +32,10 @@ var tpl = `<html>
 </html>`
 
 var db *sql.DB
-
 var err error
 
 func init() {
-	db, err = sql.Open("mysql",
-		"root:a123456@tcp(47.96.140.41:3366)/user?charset=utf8")
+	db, err = sql.Open("mysql", "root:a123456@tcp(47.96.140.41:3366)/user?charset=utf8")
 	checkErr(err)
 }
 

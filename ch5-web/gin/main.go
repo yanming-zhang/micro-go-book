@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/gin-gonic/gin"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 func getApi(c *gin.Context) {
@@ -25,18 +26,18 @@ func postjson(c *gin.Context) {
 
 	fmt.Println(data)
 	c.String(http.StatusOK, "ok")
-
 }
 
 //全局中间件 允许跨域
 func GlobalMiddleware(c *gin.Context) {
 	c.Header("Access-Control-Allow-Origin", "*")
-	c.Header("Access-Control-Allow-Headers", "Content-Type,AccessToken,X-CSRF-Token, Authorization, Token")
+	c.Header("Access-Control-Allow-Headers", "Content-Type, AccessToken, X-CSRF-Token, Authorization, Token")
 	c.Header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
 	c.Header("Access-Control-Expose-Headers", "Content-Length, Access-Control-Allow-Origin, Access-Control-Allow-Headers, Content-Type")
 	c.Header("Access-Control-Allow-Credentials", "true")
 	c.Next()
 }
+
 func AuthMiddleWare() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		token := c.Request.Header.Get("Authorization")

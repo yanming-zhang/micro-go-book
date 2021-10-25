@@ -3,18 +3,19 @@ package main
 import (
 	"flag"
 	"fmt"
-	kitlog "github.com/go-kit/kit/log"
-	"github.com/longjoy/micro-go-book/common/discover"
-	"github.com/longjoy/micro-go-book/common/loadbalance"
 	"log"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
+
+	kitlog "github.com/go-kit/kit/log"
+
+	"micro-go-book/ch10-resiliency/use-string-service/common/discover"
+	"micro-go-book/ch10-resiliency/use-string-service/common/loadbalance"
 )
 
 func main() {
-
 	// 创建环境变量
 	var (
 		consulHost = flag.String("consul.host", "127.0.0.1", "consul server ip address")
@@ -29,8 +30,6 @@ func main() {
 		logger = kitlog.With(logger, "ts", kitlog.DefaultTimestampUTC)
 		logger = kitlog.With(logger, "caller", kitlog.DefaultCaller)
 	}
-
-
 
 	consulClient, err := discover.NewKitDiscoverClient(*consulHost, *consulPort)
 

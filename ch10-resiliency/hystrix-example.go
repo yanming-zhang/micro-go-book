@@ -2,13 +2,13 @@ package main
 
 import (
 	"fmt"
-	"github.com/afex/hystrix-go/hystrix"
 	"strconv"
 	"time"
+
+	"github.com/afex/hystrix-go/hystrix"
 )
 
 func main() {
-
 	hystrix.ConfigureCommand("test_command", hystrix.CommandConfig{
 		// 设置参数
 		Timeout: hystrix.DefaultTimeout,
@@ -50,5 +50,4 @@ func main() {
 
 	circuit, _, _ := hystrix.GetCircuit("test_command")
 	fmt.Println("command test_command's circuit open is " + strconv.FormatBool(circuit.IsOpen()))
-
 }

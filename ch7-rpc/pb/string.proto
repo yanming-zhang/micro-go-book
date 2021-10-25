@@ -5,7 +5,6 @@ package pb;
 service StringService{
     rpc Concat(StringRequest) returns (StringResponse) {}
     rpc Diff(StringRequest) returns (StringResponse) {}
-
 }
 
 message StringRequest {

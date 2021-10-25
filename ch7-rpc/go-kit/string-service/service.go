@@ -14,8 +14,7 @@ const (
 
 // Service errors
 var (
-	ErrMaxSize = errors.New("maximum size of 1024 bytes exceeded")
-
+	ErrMaxSize  = errors.New("maximum size of 1024 bytes exceeded")
 	ErrStrValue = errors.New("maximum size of 1024 bytes exceeded")
 )
 

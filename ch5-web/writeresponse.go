@@ -7,7 +7,7 @@ import (
 )
 
 type User struct {
-	Name    string
+	Name   string
 	Habits []string
 }
 
@@ -16,7 +16,7 @@ func write(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("X-Custom-Header", "custom")
 	w.WriteHeader(201)
 	user := &User{
-		Name:    "aoho",
+		Name:   "aoho",
 		Habits: []string{"balls", "running", "hiking"},
 	}
 	json, _ := json.Marshal(user)

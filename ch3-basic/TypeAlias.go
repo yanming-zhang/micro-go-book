@@ -3,10 +3,9 @@ package main
 import "fmt"
 
 type aliasInt = int // 定义一个类型别名
-type myInt int // 定义一个新的类型
+type myInt int      // 定义一个新的类型
 
-func main()  {
-
+func main() {
 	var alias aliasInt
 	fmt.Printf("alias value is %v, type is %T\n", alias, alias)
 
@@ -26,23 +25,16 @@ func main()  {
 	}
 
 	score := 90
-	switch  {
+	switch {
 	case score < 100 && score >= 90:
 		fmt.Println("优秀")
 	case score < 90 && score >= 80:
 		fmt.Println("良好")
 	case score < 80 && score >= 60:
 		fmt.Println("及格")
-	case score < 60 :
+	case score < 60:
 		fmt.Println("不及格")
 	default:
 		fmt.Println("分数错误")
-
 	}
-
-
-
-
-
 }
-

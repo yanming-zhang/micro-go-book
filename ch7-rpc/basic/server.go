@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/longjoy/micro-go-book/ch7-rpc/basic/string-service"
 	"log"
+	service "micro-go-book/ch7-rpc/basic/string-service"
 	"net"
 	"net/http"
 	"net/rpc"

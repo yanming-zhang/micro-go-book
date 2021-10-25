@@ -2,8 +2,9 @@ package string_service
 
 import (
 	"context"
-	"github.com/go-kit/kit/log"
 	"time"
+
+	"github.com/go-kit/kit/log"
 )
 
 // loggingMiddleware Make a new type
@@ -21,7 +22,6 @@ func LoggingMiddleware(logger log.Logger) ServiceMiddleware {
 }
 
 func (mw loggingMiddleware) Concat(ctx context.Context, a, b string) (ret string, err error) {
-
 	defer func(begin time.Time) {
 		mw.logger.Log(
 			"function", "Concat",
@@ -37,7 +37,6 @@ func (mw loggingMiddleware) Concat(ctx context.Context, a, b string) (ret string
 }
 
 func (mw loggingMiddleware) Diff(ctx context.Context, a, b string) (ret string, err error) {
-
 	defer func(begin time.Time) {
 		mw.logger.Log(
 			"function", "Diff",

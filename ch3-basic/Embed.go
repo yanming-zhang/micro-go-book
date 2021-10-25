@@ -11,8 +11,7 @@ type Car struct {
 	Name string
 }
 
-func main()  {
-
+func main() {
 	car := &Car{
 		Wheel{
 			"圆形的",

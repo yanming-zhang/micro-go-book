@@ -3,8 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/go-kit/kit/log"
-	"github.com/hashicorp/consul/api"
 	"math/rand"
 	"net/http"
 	"net/http/httputil"
@@ -12,10 +10,12 @@ import (
 	"os/signal"
 	"strings"
 	"syscall"
+
+	"github.com/go-kit/kit/log"
+	"github.com/hashicorp/consul/api"
 )
 
 func main() {
-
 	// 创建环境变量
 	var (
 		consulHost = flag.String("consul.host", "114.67.98.210", "consul server ip address")
@@ -62,10 +62,8 @@ func main() {
 
 // NewReverseProxy 创建反向代理处理方法
 func NewReverseProxy(client *api.Client, logger log.Logger) *httputil.ReverseProxy {
-
 	//创建Director
 	director := func(req *http.Request) {
-
 		//查询原始请求路径
 		reqPath := req.URL.Path
 		if reqPath == "" {
@@ -100,5 +98,4 @@ func NewReverseProxy(client *api.Client, logger log.Logger) *httputil.ReversePro
 		req.URL.Path = "/" + destPath
 	}
 	return &httputil.ReverseProxy{Director: director}
-
 }

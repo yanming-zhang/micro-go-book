@@ -3,8 +3,9 @@ package main
 import (
 	"context"
 	"errors"
-	"github.com/go-kit/kit/endpoint"
 	"strings"
+
+	"github.com/go-kit/kit/endpoint"
 )
 
 // CalculateEndpoint define endpoint

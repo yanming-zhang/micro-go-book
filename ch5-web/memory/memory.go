@@ -55,18 +55,18 @@ func store(user User) {
 	UserById[user.Id] = &user
 	UserByName[user.Name] = append(UserByName[user.Name], &user)
 }
+
 func userInfo(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(UserById[1])
 	r.ParseForm()
 
 	for _, user := range UserByName[r.Form.Get("username")] {
 		fmt.Println(user)
-		fmt.Fprintf(w," %v",user ) //这个写入到w的是输出到客户端的
+		fmt.Fprintf(w, " %v", user) //这个写入到w的是输出到客户端的
 	}
 }
 
 func main() {
-
 	http.HandleFunc("/login", loginMemory)   //设置访问的路由
 	http.HandleFunc("/info", userInfo)       //设置访问的路由
 	err := http.ListenAndServe(":8080", nil) //设置监听的端口

@@ -4,13 +4,14 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"micro-go-book/ch10-resiliency/string-service/endpoint"
+	"net/http"
+
 	"github.com/go-kit/kit/log"
 	"github.com/go-kit/kit/transport"
 	kithttp "github.com/go-kit/kit/transport/http"
 	"github.com/gorilla/mux"
-	"github.com/longjoy/micro-go-book/ch10-resiliency/string-service/endpoint"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
-	"net/http"
 )
 
 var (

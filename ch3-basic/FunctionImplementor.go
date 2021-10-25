@@ -6,7 +6,6 @@ type Printer interface {
 	Print(p interface{})
 }
 
-
 // 函数定义为类型
 type FuncCaller func(p interface{})
 
@@ -16,7 +15,7 @@ func (funcCaller FuncCaller) Print(p interface{}) {
 	funcCaller(p)
 }
 
-func main()  {
+func main() {
 	var printer Printer
 	// 将匿名函数强转为FuncCaller赋值给printer
 	printer = FuncCaller(func(p interface{}) {

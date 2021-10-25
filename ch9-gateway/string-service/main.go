@@ -4,15 +4,15 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"github.com/go-kit/kit/log"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
+
+	"github.com/go-kit/kit/log"
 )
 
 func main() {
-
 	var (
 		consulHost  = flag.String("consul.host", "114.67.98.210", "consul ip address")
 		consulPort  = flag.String("consul.port", "8500", "consul port")

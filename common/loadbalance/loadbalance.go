@@ -2,8 +2,9 @@ package loadbalance
 
 import (
 	"errors"
-	"github.com/hashicorp/consul/api"
 	"math/rand"
+
+	"github.com/hashicorp/consul/api"
 )
 
 // 负载均衡器
@@ -18,7 +19,6 @@ type RandomLoadBalance struct {
 
 // 随机负载均衡
 func (loadBalance *RandomLoadBalance) SelectService(services []*api.AgentService) (*api.AgentService, error) {
-
 	if services == nil || len(services) == 0 {
 		return nil, ErrNoInstances
 	}
@@ -31,7 +31,6 @@ type WeightRoundRobinLoadBalance struct {
 
 //// 权重平滑负载均衡
 //func (loadBalance *WeightRoundRobinLoadBalance) SelectService(services []*discover.ServiceInstance) (best *discover.ServiceInstance, err error) {
-//
 //	if services == nil || len(services) == 0 {
 //		return nil, errors.New("service instances are not exist")
 //	}

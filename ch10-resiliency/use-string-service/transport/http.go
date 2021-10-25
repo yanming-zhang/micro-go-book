@@ -4,14 +4,16 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"net/http"
+
 	"github.com/afex/hystrix-go/hystrix"
 	"github.com/go-kit/kit/log"
 	"github.com/go-kit/kit/transport"
 	kithttp "github.com/go-kit/kit/transport/http"
 	"github.com/gorilla/mux"
-	"github.com/longjoy/micro-go-book/ch10-resiliency/use-string-service/endpoint"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
-	"net/http"
+
+	"micro-go-book/ch10-resiliency/use-string-service/endpoint"
 )
 
 var (
@@ -21,7 +23,6 @@ var (
 // MakeHttpHandler make http handler use mux
 func MakeHttpHandler(ctx context.Context, endpoints endpoint.UseStringEndpoints, logger log.Logger) http.Handler {
 	r := mux.NewRouter()
-
 
 	options := []kithttp.ServerOption{
 		kithttp.ServerErrorHandler(transport.NewLogErrorHandler(logger)),

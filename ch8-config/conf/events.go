@@ -2,8 +2,9 @@ package conf
 
 import (
 	"fmt"
-	"github.com/streadway/amqp"
 	"log"
+
+	"github.com/streadway/amqp"
 )
 
 func StartListener(appName string, amqpServer string, exchangeName string) {
